@@ -54,12 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericRepository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="PartCatalogService.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Service\IPartCatalogService.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Service\PartCatalogService.cs" />
     <Compile Include="PartDTO.cs" />
-    <Compile Include="PartRepository.cs" />
-    <Compile Include="PartsCatalog.cs">
+    <Compile Include="Repository\PartRepository.cs" />
+    <Compile Include="DAL\PartsCatalog.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PartsCatalog.tt</DependentUpon>
@@ -68,15 +69,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="EF.Reverse.POCO.Core.ttinclude" />
-    <None Include="EF.Reverse.POCO.ttinclude" />
+    <None Include="DAL\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="DAL\EF.Reverse.POCO.ttinclude" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PartsCatalog.tt">
+    <Content Include="DAL\PartsCatalog.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PartsCatalog.cs</LastGenOutput>
     </Content>

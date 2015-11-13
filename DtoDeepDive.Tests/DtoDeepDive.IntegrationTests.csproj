@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Given_the_parts_in_the_catalog.cs" />
+    <Compile Include="Parts_catalog_db_context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToJson.cs" />
   </ItemGroup>

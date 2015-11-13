@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Linq;
+using DtoDeepDive.Data.DAL;
+using DtoDeepDive.Data.Repository;
 
-namespace DtoDeepDive.Data {
-    public class PartCatalogService {
+namespace DtoDeepDive.Data.Service {
+    public class PartCatalogService : IPartCatalogService {
         private readonly IRepository<Part> _partRepository;
         private readonly PartAssembler _partAssembler;
         public PartCatalogService(IRepository<Part> partRepository, PartAssembler partAssembler) {

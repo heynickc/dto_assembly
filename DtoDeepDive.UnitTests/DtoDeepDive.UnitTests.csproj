@@ -50,6 +50,10 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -77,12 +81,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Given_a_part_catalog_repository.cs" />
-    <Compile Include="Parts_catalog_dto_assembler.cs" />
+    <Compile Include="Part_catalog_repository.cs" />
+    <Compile Include="Part_catalog_dto_assembler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToJson.cs" />
+    <Compile Include="Web_ui_ioc.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DtoDeepDive.WebUI\DtoDeepDive.WebUI.csproj">
+      <Project>{89c42009-ddf8-434f-ad97-c2facd077f65}</Project>
+      <Name>DtoDeepDive.WebUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTODeepDive\DtoDeepDive.Data.csproj">
       <Project>{d6a90269-26f9-45b9-b464-9fe451f0227a}</Project>
       <Name>DtoDeepDive.Data</Name>

@@ -7,13 +7,15 @@ using DtoDeepDive.Data;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using DtoDeepDive.Data;
+using DtoDeepDive.Data.DAL;
+using DtoDeepDive.Data.Repository;
+using DtoDeepDive.Data.Service;
 
 namespace DtoDeepDive.UnitTests {
-    public class Parts_catalog_dto_assembler : IDisposable {
+    public class Part_catalog_dto_assembler : IDisposable {
         private readonly ITestOutputHelper _output;
         private readonly IPartsCatalogDbContext _db;
-        public Parts_catalog_dto_assembler(ITestOutputHelper output) {
+        public Part_catalog_dto_assembler(ITestOutputHelper output) {
             _output = output;
             _db = new FakePartsCatalogDbContext();
             for (int i = 0; i < 10; i++) {
@@ -37,7 +39,7 @@ namespace DtoDeepDive.UnitTests {
             _db.SaveChanges();
         }
         [Fact]
-        public void Get_part_dto_from_assembler() {
+        public void get_part_dto_from_assembler() {
             var repository = new PartRepository(_db);
             var assembler = new PartAssembler();
             var partCatalogService = new PartCatalogService(repository, assembler);

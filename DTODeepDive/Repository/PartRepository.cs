@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using DtoDeepDive.Data.DAL;
 
-namespace DtoDeepDive.Data {
+namespace DtoDeepDive.Data.Repository {
     public class PartRepository : IRepository<Part> {
         private readonly IPartsCatalogDbContext _dbContext;
         public PartRepository(IPartsCatalogDbContext dbContext) {

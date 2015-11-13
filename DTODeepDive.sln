@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoDeepDive.IntegrationTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoDeepDive.UnitTests", "DtoDeepDive.UnitTests\DtoDeepDive.UnitTests.csproj", "{10155A03-C4E0-4E94-95E3-39D97D85AE60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoDeepDive.WebUI", "DtoDeepDive.WebUI\DtoDeepDive.WebUI.csproj", "{89C42009-DDF8-434F-AD97-C2FACD077F65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{10155A03-C4E0-4E94-95E3-39D97D85AE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10155A03-C4E0-4E94-95E3-39D97D85AE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10155A03-C4E0-4E94-95E3-39D97D85AE60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C42009-DDF8-434F-AD97-C2FACD077F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C42009-DDF8-434F-AD97-C2FACD077F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C42009-DDF8-434F-AD97-C2FACD077F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C42009-DDF8-434F-AD97-C2FACD077F65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
