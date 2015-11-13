@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DtoDeepDive.Data;
-using FluentAssertions;
-using Xunit;
-using Xunit.Abstractions;
 using DtoDeepDive.Data.DAL;
 using DtoDeepDive.Data.Repository;
 using DtoDeepDive.Data.Service;
+using FluentAssertions;
+using Xunit;
+using Xunit.Abstractions;
 
-namespace DtoDeepDive.UnitTests {
+namespace DtoDeepDive.UnitTests.PartCatalog {
     public class Part_catalog_dto_assembler : IDisposable {
         private readonly ITestOutputHelper _output;
         private readonly IPartsCatalogDbContext _db;
