@@ -1,6 +1,7 @@
 ﻿using System;
 using DtoDeepDive.Data;
 using DtoDeepDive.Data.DAL;
+using DtoDeepDive.Data.DTO;
 using DtoDeepDive.Data.Repository;
 using DtoDeepDive.Data.Service;
 using FluentAssertions;

@@ -33,7 +33,7 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
         [Fact]
         public void when_getting_all_parts_from_repository() {
             var repository = new PartRepository(_db);
-            var parts = repository.GetAll(x => x.PartNumber != null);
+            var parts = repository.GetAll(x => true);
             _output.WriteLine(parts.ToJson());
         }
         public void Dispose() {

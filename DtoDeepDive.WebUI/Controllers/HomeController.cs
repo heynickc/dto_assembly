@@ -13,6 +13,7 @@ namespace DtoDeepDive.WebUI.Controllers {
             _partCatalogService = partCatalogService;
         }
         public ActionResult Index() {
+            //var partsCatalog = _partCatalogService.GetAllParts()
             return View();
         }
 

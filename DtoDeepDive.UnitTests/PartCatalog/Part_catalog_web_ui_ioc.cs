@@ -1,8 +1,9 @@
 ﻿using DtoDeepDive.Data.DAL;
 using DtoDeepDive.Data.Repository;
-using DtoDeepDive.WebUI.IOC;
+using DtoDeepDive.Data.Service;
 using FluentAssertions;
 using Ninject;
+using Ninject.Modules;
 using Xunit;
 
 namespace DtoDeepDive.UnitTests.PartCatalog {
@@ -10,9 +11,16 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
         [Fact]
         public void Ninject_service_module_binds_correctly() {
             using (var kernel = new StandardKernel(new ServiceModule())) {
-                var repository = kernel.Get<IRepository<Part>>();
-                repository.Should().BeOfType<PartRepository>();
+                var repository = kernel.Get<IPartCatalogService>();
+                repository.Should().BeOfType<PartCatalogService>();
             }
+        }
+    }
+    public class ServiceModule : NinjectModule {
+        public override void Load() {
+            Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
+            Bind<IRepository<Part>>().To<PartRepository>();
+            Bind<IPartCatalogService>().To<PartCatalogService>();
         }
     }
 }
