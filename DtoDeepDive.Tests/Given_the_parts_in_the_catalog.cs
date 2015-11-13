@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DtoDeepDive.Data;
 using Xunit;
 using Xunit.Abstractions;
+using DtoDeepDive.Data;
 
 namespace DtoDeepDive.IntegrationTests {
     public class Given_the_parts_from_the_catalog : IDisposable {

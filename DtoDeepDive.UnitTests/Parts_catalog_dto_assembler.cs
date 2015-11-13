@@ -7,6 +7,7 @@ using DtoDeepDive.Data;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using DtoDeepDive.Data;
 
 namespace DtoDeepDive.UnitTests {
     public class Parts_catalog_dto_assembler : IDisposable {
