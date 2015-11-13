@@ -19,9 +19,10 @@ namespace DtoDeepDive.Data.Service {
         }
         public PartCatalogDTO GetPartCatalog() {
             var parts = _partRepository.GetAll(x => true);
-            var partCatalogDto = new PartCatalogDTO() {
-                Parts = parts.Select(part => _partAssembler.WritePartDto(part)).ToList()
-            };
+            var partCatalogDto = new PartCatalogDTO();
+            foreach (var part in parts) {
+                partCatalogDto.Parts.Add(_partAssembler.WritePartDto(part));
+            }
             return partCatalogDto;
         }
     }
@@ -54,6 +55,7 @@ namespace DtoDeepDive.Data.Service {
                 }).ToList();
             partDto.Components = componentsList;
             partDto.Labor = laborSequenceList;
+
             return partDto;
         }
     }

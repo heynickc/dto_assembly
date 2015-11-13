@@ -44,6 +44,15 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
             var partDto = partCatalogService.GetPart("TEST-PART-NUMBER|1");
             partDto.Should().BeOfType<PartDTO>();
         }
+        [Fact]
+        public void get_part_catalog_dto_from_assembler() {
+            var repository = new PartRepository(_db);
+            var assembler = new PartAssembler();
+            var partCatalogService = new PartCatalogService(repository, assembler);
+
+            var partCatalogDto = partCatalogService.GetPartCatalog();
+            partCatalogDto.Should().BeOfType<PartCatalogDTO>();
+        }
         public void Dispose() {
             _db.Dispose();
         }
