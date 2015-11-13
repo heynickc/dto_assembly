@@ -4,7 +4,6 @@ using DtoDeepDive.Data.DAL;
 
 namespace DtoDeepDive.Data.DTO {
     public class PartDTO {
-        public int Id { get; set; }
         public string PartNumber { get; set; }
         public string ExtendedDescription { get; set; }
         public string PartDescription { get; set; }

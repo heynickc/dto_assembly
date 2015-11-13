@@ -382,7 +382,7 @@ namespace DtoDeepDive.Data.DAL
         public string UnitOfMeasure { get; set; } // UnitOfMeasure
         public int? Type { get; set; } // Type
         public int ParentPartId { get; set; } // ParentPartId
-        public decimal QuantityPerAssembly { get; set; } // QuantityPerAssembly
+        public double QuantityPerAssembly { get; set; } // QuantityPerAssembly
         public decimal CostPerUnit { get; set; } // CostPerUnit
 
         // Foreign keys
@@ -395,7 +395,7 @@ namespace DtoDeepDive.Data.DAL
         public int Id { get; set; } // Id (Primary key)
         public string LaborSequenceNumber { get; set; } // LaborSequenceNumber
         public string LaborSequenceDesc { get; set; } // LaborSequenceDesc
-        public decimal RunTime { get; set; } // RunTime
+        public double RunTime { get; set; } // RunTime
         public decimal Burden { get; set; } // Burden
         public decimal LaborRate { get; set; } // LaborRate
         public string Facility { get; set; } // Facility
@@ -483,7 +483,7 @@ namespace DtoDeepDive.Data.DAL
             Property(x => x.UnitOfMeasure).HasColumnName("UnitOfMeasure").IsOptional().HasColumnType("nvarchar");
             Property(x => x.Type).HasColumnName("Type").IsOptional().HasColumnType("int");
             Property(x => x.ParentPartId).HasColumnName("ParentPartId").IsRequired().HasColumnType("int");
-            Property(x => x.QuantityPerAssembly).HasColumnName("QuantityPerAssembly").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
+            Property(x => x.QuantityPerAssembly).HasColumnName("QuantityPerAssembly").IsRequired().HasColumnType("float");
             Property(x => x.CostPerUnit).HasColumnName("CostPerUnit").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
 
             // Foreign keys
@@ -504,10 +504,10 @@ namespace DtoDeepDive.Data.DAL
             ToTable(schema + ".LaborSequences");
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName("Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName("Id").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.LaborSequenceNumber).HasColumnName("LaborSequenceNumber").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.LaborSequenceDesc).HasColumnName("LaborSequenceDesc").IsOptional().HasColumnType("nvarchar");
-            Property(x => x.RunTime).HasColumnName("RunTime").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
+            Property(x => x.RunTime).HasColumnName("RunTime").IsRequired().HasColumnType("float");
             Property(x => x.Burden).HasColumnName("Burden").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.LaborRate).HasColumnName("LaborRate").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.Facility).HasColumnName("Facility").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);

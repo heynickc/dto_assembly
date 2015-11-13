@@ -10,9 +10,9 @@ namespace DtoDeepDive.Data.DTO {
         public string Description { get; set; }
         public string Material { get; set; }
         public string UnitOfMeasure { get; set; }
-        public decimal QuantityPerAssembly { get; set; }
+        public double QuantityPerAssembly { get; set; }
         public decimal CostPerUnit { get; set; }
-        public decimal QuantityRequired { get; set; }
+        public double QuantityRequired { get; set; }
         public decimal MaterialCost { get; set; }
     }
 }

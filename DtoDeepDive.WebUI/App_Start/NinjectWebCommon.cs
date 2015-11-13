@@ -64,7 +64,7 @@ namespace DtoDeepDive.WebUI
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
+            kernel.Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>().InRequestScope();
             kernel.Bind<IRepository<Part>>().To<PartRepository>();
             kernel.Bind<IPartCatalogService>().To<PartCatalogService>();
         }        

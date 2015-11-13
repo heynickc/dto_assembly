@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DtoDeepDive.Data.DTO {
     public class PartCatalogDTO {
+        public PartCatalogDTO() {
+            Parts = new List<PartDTO>();
+        }
         public List<PartDTO> Parts { get; set; }
         public double TotalCost { get; set; }
         public double TotalMaterialCost { get; set; }

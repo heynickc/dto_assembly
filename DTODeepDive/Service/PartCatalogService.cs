@@ -18,7 +18,7 @@ namespace DtoDeepDive.Data.Service {
             return _partAssembler.WritePartDto(part);
         }
         public PartCatalogDTO GetPartCatalog() {
-            var parts = _partRepository.GetAll(x => true);
+            var parts = _partRepository.GetAll(x => true).ToList();
             var partCatalogDto = new PartCatalogDTO();
             foreach (var part in parts) {
                 partCatalogDto.Parts.Add(_partAssembler.WritePartDto(part));
@@ -42,8 +42,8 @@ namespace DtoDeepDive.Data.Service {
                      UnitOfMeasure = component.UnitOfMeasure,
                      QuantityPerAssembly = component.QuantityPerAssembly,
                      CostPerUnit = component.CostPerUnit,
-                     QuantityRequired = (decimal)part.TotalQuantityRequired * component.QuantityPerAssembly,
-                     MaterialCost = ((decimal)part.TotalQuantityRequired * component.QuantityPerAssembly)*component.CostPerUnit
+                     QuantityRequired = part.TotalQuantityRequired * component.QuantityPerAssembly,
+                     MaterialCost = (decimal)(part.TotalQuantityRequired * component.QuantityPerAssembly)*component.CostPerUnit
                 }).ToList();
             var laborSequenceList = part.LaborSequences
                 .Select(labor => new LaborSequenceDTO() {
@@ -51,7 +51,7 @@ namespace DtoDeepDive.Data.Service {
                     SequenceDescription = labor.LaborSequenceDesc,
                     RunTime = labor.RunTime,
                     LaborRate = labor.LaborRate,
-                    LaborCost = (labor.RunTime*labor.LaborRate)*labor.Burden
+                    LaborCost = ((decimal)labor.RunTime*labor.LaborRate)*labor.Burden
                 }).ToList();
             partDto.Components = componentsList;
             partDto.Labor = laborSequenceList;
