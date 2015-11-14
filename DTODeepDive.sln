@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoDeepDive.Data", "DTODeepDive\DtoDeepDive.Data.csproj", "{D6A90269-26F9-45B9-B464-9FE451F0227A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoDeepDive.Data", "DtoDeepDive.Data\DtoDeepDive.Data.csproj", "{D6A90269-26F9-45B9-B464-9FE451F0227A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DtoDeepDive.IntegrationTests", "DtoDeepDive.Tests\DtoDeepDive.IntegrationTests.csproj", "{60B376A1-0EF8-42DC-B0B6-366ED7CE99AC}"
 EndProject

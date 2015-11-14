@@ -213,7 +213,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DTODeepDive\DtoDeepDive.Data.csproj">
+    <ProjectReference Include="..\DtoDeepDive.Data\DtoDeepDive.Data.csproj">
       <Project>{d6a90269-26f9-45b9-b464-9fe451f0227a}</Project>
       <Name>DtoDeepDive.Data</Name>
     </ProjectReference>
