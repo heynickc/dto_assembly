@@ -11,5 +11,7 @@ namespace DtoDeepDive.Data.DTO {
         public string UnitOfMeasure { get; set; }
         public List<LaborSequenceDTO> Labor { get; set; }
         public List<ComponentDTO> Components { get; set; }
+        public decimal TotalMaterialCost { get; set; }
+        public decimal TotalLaborCost { get; set; }
     }
 }

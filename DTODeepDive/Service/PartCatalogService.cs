@@ -19,10 +19,7 @@ namespace DtoDeepDive.Data.Service {
         }
         public PartCatalogDTO GetPartCatalog() {
             var parts = _partRepository.GetAll(x => true).ToList();
-            var partCatalogDto = new PartCatalogDTO();
-            foreach (var part in parts) {
-                partCatalogDto.Parts.Add(_partAssembler.WritePartDto(part));
-            }
+            var partCatalogDto = _partAssembler.WritePartCatalogDTO(parts);
             return partCatalogDto;
         }
     }
@@ -56,7 +53,25 @@ namespace DtoDeepDive.Data.Service {
             partDto.Components = componentsList;
             partDto.Labor = laborSequenceList;
 
+            partDto.TotalMaterialCost = partDto.Components.Sum(x => x.MaterialCost);
+            partDto.TotalLaborCost = partDto.Labor.Sum(x => x.LaborCost);
+
             return partDto;
+        }
+        public PartCatalogDTO WritePartCatalogDTO(List<Part> parts) {
+            var partCatalogDto = new PartCatalogDTO();
+            decimal totalCost;
+            decimal totalLaborCost;
+            decimal totalMaterialCost;
+            double totalWeight;
+            foreach (var part in parts) {
+                partCatalogDto.Parts.Add(WritePartDto(part));
+            }
+            partCatalogDto.TotalMaterialCost = partCatalogDto.Parts.Sum(x => x.TotalMaterialCost);
+            partCatalogDto.TotalLaborCost = partCatalogDto.Parts.Sum(x => x.TotalLaborCost);
+            partCatalogDto.TotalCost = partCatalogDto.TotalMaterialCost + partCatalogDto.TotalLaborCost;
+
+            return partCatalogDto;
         }
     }
 }

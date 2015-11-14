@@ -10,9 +10,8 @@ namespace DtoDeepDive.Data.DTO {
             Parts = new List<PartDTO>();
         }
         public List<PartDTO> Parts { get; set; }
-        public double TotalCost { get; set; }
-        public double TotalMaterialCost { get; set; }
-        public double TotalLaborCost { get; set; }
-        public double TotalWeight { get; set; }
+        public decimal TotalCost { get; set; }
+        public decimal TotalMaterialCost { get; set; }
+        public decimal TotalLaborCost { get; set; }
     }
 }
