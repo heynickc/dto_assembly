@@ -1,0 +1,8 @@
+﻿@model DtoDeepDive.Data.DTO.PartDTO
+<tr>
+  @Html.HiddenFor(model => model.PartNumber)
+  <td class="text-center">@Html.CheckBoxFor(model => model.Selected)</td>
+  <td>@Html.ActionLink(Model.PartNumber, "")</td>
+  <td>@Model.ExtendedDescription</td>
+  <td>@Html.TextBoxFor(model => model.Quantity)</td>
+</tr>

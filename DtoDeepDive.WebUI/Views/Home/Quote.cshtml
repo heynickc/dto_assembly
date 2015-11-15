@@ -1,0 +1,17 @@
+﻿@model DtoDeepDive.Data.DTO.QuoteDTO
+@{
+    ViewBag.Title = "Quote";
+}
+
+<h2>Quote</h2>
+<br />
+<div class="container">
+  <div class="row"></div>
+  @foreach (var part in Model.Parts) {
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>Part Number: <strong>@part.PartNumber</strong></p>
+        </div>
+      </div>
+  }
+</div>

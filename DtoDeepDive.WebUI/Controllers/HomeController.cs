@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DtoDeepDive.Data;
 using DtoDeepDive.Data.Service;
+using DtoDeepDive.Data.DTO;
 
 namespace DtoDeepDive.WebUI.Controllers {
     public class HomeController : Controller {
@@ -27,6 +28,11 @@ namespace DtoDeepDive.WebUI.Controllers {
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Quote(PartCatalogDTO partCatalogDto) {
+            var quoteDto = _partCatalogService.GetQuote(partCatalogDto);
+            return View(quoteDto);
         }
     }
 }

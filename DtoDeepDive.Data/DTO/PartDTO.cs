@@ -13,5 +13,7 @@ namespace DtoDeepDive.Data.DTO {
         public List<ComponentDTO> Components { get; set; }
         public decimal TotalMaterialCost { get; set; }
         public decimal TotalLaborCost { get; set; }
+        public bool Selected { get; set; }
+        public double Quantity { get; set; }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="DTO\ComponentDTO.cs" />
     <Compile Include="DTO\LaborSequenceDTO.cs" />
     <Compile Include="DTO\PartCatalogDTO.cs" />
+    <Compile Include="DTO\QuoteDTO.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Service\IPartCatalogService.cs" />
     <Compile Include="Repository\IRepository.cs" />

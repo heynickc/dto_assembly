@@ -3,35 +3,24 @@
     ViewBag.Title = "Home Page";
 }
 <div class="container">
+  <h2>Part Catalog</h2>
   <br />
-  <div class="row">
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Part #</th>
-          <th>Extended Description</th>
-          <th>Part Description</th>
-          <th>Sales Code</th>
-          <th>Unit Of Measure</th>
-          <th>Part #</th>
-          <th>Part #</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (Model.Parts != null) {
-          foreach (var partDto in Model.Parts) {
-                <tr>
-                  <td>@partDto.PartNumber</td>
-                  <td>@partDto.ExtendedDescription</td>
-                  <td>@partDto.PartDescription</td>
-                  <td>@partDto.SalesCode</td>
-                  <td>@partDto.UnitOfMeasure</td>
-                  <td>@partDto.PartNumber</td>
-                  <td>@partDto.PartNumber</td>
-                </tr>
-          }
-        }
-      </tbody>
-    </table>
-  </div>
+  @using (Html.BeginForm("Quote", "Home")) {
+      <div class="row">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Part #</th>
+              <th>Extended Description</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            @Html.EditorFor(x => x.Parts)
+          </tbody>
+        </table>
+        <button class="btn btn-default" type="submit">Generate Quote</button>
+      </div>
+  }
 </div>
