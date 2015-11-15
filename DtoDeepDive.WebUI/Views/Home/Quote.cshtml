@@ -10,7 +10,36 @@
   @foreach (var part in Model.Parts) {
       <div class="panel panel-default">
         <div class="panel-body">
-          <p>Part Number: <strong>@part.PartNumber</strong></p>
+          <h4>Part Number: <strong>@part.PartNumber</strong></h4>
+          <h4>Components</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Component Number</th>
+                <th>Description</th>
+                <th>Material</th>
+                <th>Quantity Per Assembly</th>
+                <th>Quantity Required</th>
+                <th>Cost Per Unit</th>
+                <th>Total Cost</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var component in part.Components) {
+                <tr>
+                  <td>@component.Number</td>
+                  <td>@component.Description</td>
+                  <td>@component.Material</td>
+                  <td>@component.QuantityPerAssembly</td>
+                  <td>@component.QuantityRequired</td>
+                  <td>@component.CostPerUnit</td>
+                  <td>@component.MaterialCost</td>
+                </tr>
+              }
+            </tbody>
+          </table>
         </div>
       </div>
   }

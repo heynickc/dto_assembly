@@ -4,6 +4,10 @@ using DtoDeepDive.Data.DAL;
 
 namespace DtoDeepDive.Data.DTO {
     public class PartDTO {
+        public PartDTO() {
+            this.Labor = new List<LaborSequenceDTO>();
+            this.Components = new List<ComponentDTO>();
+        }
         public string PartNumber { get; set; }
         public string ExtendedDescription { get; set; }
         public string PartDescription { get; set; }
@@ -15,5 +19,14 @@ namespace DtoDeepDive.Data.DTO {
         public decimal TotalLaborCost { get; set; }
         public bool Selected { get; set; }
         public double Quantity { get; set; }
+        public void CalculateTotalCost(double quantity) {
+            this.Quantity = quantity;
+            foreach (var component in Components) {
+                component.CalculateMaterialCost(quantity);
+            }
+            foreach (var labor in Labor) {
+                labor.CalculateTotalLaborCost(quantity);
+            }
+        }
     }
 }

@@ -14,5 +14,9 @@ namespace DtoDeepDive.Data.DTO {
         public decimal CostPerUnit { get; set; }
         public double QuantityRequired { get; set; }
         public decimal MaterialCost { get; set; }
+        public void CalculateMaterialCost(double quantity) {
+            QuantityRequired = quantity * QuantityPerAssembly;
+            MaterialCost = (decimal)(quantity * QuantityPerAssembly) * CostPerUnit;
+        }
     }
 }

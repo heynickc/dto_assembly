@@ -10,6 +10,10 @@ namespace DtoDeepDive.Data.DTO {
         public string SequenceDescription { get; set; }
         public double RunTime { get; set; }
         public decimal LaborRate { get; set; }
+        public decimal Burden { get; set; }
         public decimal LaborCost { get; set; }
+        public void CalculateTotalLaborCost(double quantity) {
+            LaborCost = ((decimal)RunTime * LaborRate) * Burden;
+        }
     }
 }

@@ -23,7 +23,14 @@ namespace DtoDeepDive.Data.Service {
             return partCatalogDto;
         }
         public QuoteDTO GetQuote(PartCatalogDTO partCatalogDto) {
-            var quoteDto = _partAssembler.WriteQuoteDTO(partCatalogDto.getSelectedParts());
+            // have to reconstitute the components and labor
+            // will refactor
+            var selectedPartIds = partCatalogDto.Parts.Where(y => y.Selected).Select(x => x.PartNumber).ToList();
+            var selectedParts = new List<PartDTO>();
+            foreach (var partId in selectedPartIds) {
+                selectedParts.Add(GetPart(partId));
+            }
+            var quoteDto = _partAssembler.WriteQuoteDTO(selectedParts);
             return quoteDto;
         }
     }
@@ -42,9 +49,7 @@ namespace DtoDeepDive.Data.Service {
                      Material = component.Material,
                      UnitOfMeasure = component.UnitOfMeasure,
                      QuantityPerAssembly = component.QuantityPerAssembly,
-                     CostPerUnit = component.CostPerUnit,
-                     QuantityRequired = part.TotalQuantityRequired * component.QuantityPerAssembly,
-                     MaterialCost = (decimal)(part.TotalQuantityRequired * component.QuantityPerAssembly)*component.CostPerUnit
+                     CostPerUnit = component.CostPerUnit
                 }).ToList();
             var laborSequenceList = part.LaborSequences
                 .Select(labor => new LaborSequenceDTO() {
@@ -52,7 +57,7 @@ namespace DtoDeepDive.Data.Service {
                     SequenceDescription = labor.LaborSequenceDesc,
                     RunTime = labor.RunTime,
                     LaborRate = labor.LaborRate,
-                    LaborCost = ((decimal)labor.RunTime*labor.LaborRate)*labor.Burden
+                    Burden = labor.Burden
                 }).ToList();
             partDto.Components = componentsList;
             partDto.Labor = laborSequenceList;
