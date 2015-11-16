@@ -6,7 +6,6 @@ namespace DtoDeepDive.Data.Service {
     public interface IPartCatalogService {
         PartDTO GetPart(string partNumber);
         IEnumerable<PartDTO> GetAllParts();
-        QuoteDTO GetQuote(Dictionary<string, double> selectedItems);
+        QuoteDTO GetQuote(List<PartDTO> selectedParts);
     }
-
 }

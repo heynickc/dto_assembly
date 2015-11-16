@@ -5,21 +5,23 @@
 
 <div class="container">
   <h2>Quote</h2>
+  <h3>Total Cost: @Model.TotalCost.ToString("C")</h3>
   <br />
   <div class="row"></div>
   @foreach (var part in Model.Parts) {
       <div class="panel panel-default">
-        <div class="panel-heading">Part Number: <strong>@part.PartNumber</strong></div>
+        <div class="panel-heading">
+          <p>Part Number: <strong>@part.PartNumber</strong></p>
+          <p>Total Cost: <strong>@part.TotalCost.ToString("C")</strong></p>
+        </div>
         <div class="panel-body">
 
-          <h4>Components</h4>
+          <p>Components</p>
           <table class="table table-condensed">
             <thead>
               <tr>
                 <th>Component Number</th>
                 <th>Description</th>
-                <th>Material</th>
-                <th>Quantity Per Assembly</th>
                 <th>Quantity Required</th>
                 <th>Cost Per Unit</th>
                 <th>Component Cost</th>
@@ -27,24 +29,51 @@
             </thead>
             <tbody>
               @foreach (var component in part.Components) {
-                <tr>
-                  <td>@component.Number</td>
-                  <td>@component.Description</td>
-                  <td>@component.Material</td>
-                  <td>@component.QuantityPerAssembly</td>
-                  <td>@component.QuantityRequired</td>
-                  <td>@component.CostPerUnit</td>
-                  <td>@component.ComponentCost</td>
-                </tr>
+                  <tr>
+                    <td>@component.Number</td>
+                    <td>@component.Description</td>
+                    <td>@component.GetQuantityRequired(part.Quantity)</td>
+                    <td>@component.CostPerUnit.ToString("C")</td>
+                    <td>@component.GetComponentCost(part.Quantity).ToString("C")</td>
+                  </tr>
               }
               <tr>
                 <td></td>
                 <td></td>
                 <td></td>
+                <td><strong>Total Material Cost</strong></td>
+                <td>@part.TotalComponentCost.ToString("C")</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Labor</p>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Sequence Number</th>
+                <th>Description</th>
+                <th>Run Time</th>
+                <th>Labor Rate</th>
+                <th>Labor Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var laborSequence in part.Labor) {
+                  <tr>
+                    <td>@laborSequence.SequenceNumber</td>
+                    <td>@laborSequence.SequenceDescription</td>
+                    <td>@laborSequence.RunTime</td>
+                    <td>@laborSequence.LaborRate.ToString("C")</td>
+                    <td>@laborSequence.GetLaborCost(part.Quantity).ToString("C")</td>
+                  </tr>
+              }
+              <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>@Model.TotalMaterialCost</td>
+                <td><strong>Total Labor Cost</strong></td>
+                <td>@part.TotalLaborCost.ToString("C")</td>
               </tr>
             </tbody>
           </table>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DtoDeepDive.Data.DAL;
 
 namespace DtoDeepDive.Data.DTO {
@@ -13,19 +14,11 @@ namespace DtoDeepDive.Data.DTO {
         public string PartDescription { get; set; }
         public string SalesCode { get; set; }
         public string UnitOfMeasure { get; set; }
+        public double Quantity { get; set; }
         public List<LaborSequenceDTO> Labor { get; set; }
         public List<ComponentDTO> Components { get; set; }
-        public decimal TotalComponentCost { get; set; }
-        public decimal TotalLaborCost { get; set; }
-        public void CalculateTotalCost(double quantity) {
-            foreach (var component in Components) {
-                component.CalculateComponentCost(quantity);
-                TotalComponentCost += component.ComponentCost;
-            }
-            foreach (var labor in Labor) {
-                labor.CalculateTotalLaborCost(quantity);
-                TotalLaborCost += labor.LaborCost;
-            }
-        }
+        public decimal TotalComponentCost { get { return Components.Sum(x => x.GetComponentCost(Quantity)); } }
+        public decimal TotalLaborCost { get { return Labor.Sum(x => x.GetLaborCost(Quantity)); } }
+        public decimal TotalCost { get { return TotalComponentCost + TotalLaborCost; } }
     }
 }

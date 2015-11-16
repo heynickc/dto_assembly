@@ -60,6 +60,7 @@
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Service\IPartCatalogService.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="DTOAssemblers\PartAssembler.cs" />
     <Compile Include="Service\PartCatalogService.cs" />
     <Compile Include="DTO\PartDTO.cs" />
     <Compile Include="Repository\PartRepository.cs" />

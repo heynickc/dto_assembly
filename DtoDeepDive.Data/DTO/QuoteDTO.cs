@@ -10,13 +10,8 @@ namespace DtoDeepDive.Data.DTO {
             Parts = new List<PartDTO>();
         }
         public List<PartDTO> Parts { get; set; }
-        public decimal TotalCost { get; set; }
-        public decimal TotalMaterialCost { get; set; }
-        public decimal TotalLaborCost { get; set; }
-        public void CalculateTotalCosts() {
-            TotalMaterialCost = Parts.Sum(x => x.TotalComponentCost);
-            TotalLaborCost = Parts.Sum(x => x.TotalLaborCost);
-            TotalCost = TotalMaterialCost + TotalLaborCost;
-        }
+        public decimal TotalCost { get { return TotalMaterialCost + TotalLaborCost; } }
+        public decimal TotalMaterialCost { get { return Parts.Sum(x => x.TotalComponentCost); } }
+        public decimal TotalLaborCost { get { return Parts.Sum(x => x.TotalLaborCost); } }
     }
 }

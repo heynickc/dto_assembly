@@ -39,11 +39,13 @@ namespace DtoDeepDive.WebUI.Controllers {
         }
 
         public ActionResult Quote(CatalogViewModel catalogViewModel) {
-            var selectedItems = catalogViewModel.Items
+            var partDtos = catalogViewModel.Items
                 .Where(i => i.Selected)
-                .Select(pn => new { pn.PartNumber, pn.Quantity })
-                .ToDictionary(pn => pn.PartNumber, qty => qty.Quantity);
-            var quoteDto = _partCatalogService.GetQuote(selectedItems);
+                .Select(item => new PartDTO() {
+                    PartNumber = item.PartNumber,
+                    Quantity = item.Quantity
+                }).ToList();
+            var quoteDto = _partCatalogService.GetQuote(partDtos);
             return View(quoteDto);
         }
     }

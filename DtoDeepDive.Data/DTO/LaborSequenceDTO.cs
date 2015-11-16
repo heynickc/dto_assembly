@@ -12,8 +12,8 @@ namespace DtoDeepDive.Data.DTO {
         public decimal LaborRate { get; set; }
         public decimal Burden { get; set; }
         public decimal LaborCost { get; set; }
-        public void CalculateTotalLaborCost(double quantity) {
-            LaborCost = ((decimal)RunTime * LaborRate) * Burden;
+        public decimal GetLaborCost(double quantity) {
+            return ((decimal)RunTime * LaborRate) * Burden;
         }
     }
 }
