@@ -7,6 +7,7 @@ using DtoDeepDive.Data.Service;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using System.Collections.Generic;
 
 namespace DtoDeepDive.UnitTests.PartCatalog {
     public class Part_catalog_dto_assembler : IDisposable {
@@ -68,9 +69,9 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
             var assembler = new PartAssembler();
             var partCatalogService = new PartCatalogService(repository, assembler);
 
-            var partCatalogDto = partCatalogService.GetPartCatalog();
+            var partCatalogDto = partCatalogService.GetAllParts();
             _output.WriteLine(partCatalogDto.ToJson());
-            partCatalogDto.Should().BeOfType<PartCatalogDTO>();
+            partCatalogDto.Should().BeOfType<IEnumerable<PartDTO>>();
         }
         public void Dispose() {
             _db.Dispose();

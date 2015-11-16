@@ -56,36 +56,5 @@ namespace DtoDeepDive.UnitTests.WebUI {
             }
             _db.SaveChanges();
         }
-        [Fact]
-        public void Home_controller_get_part_catalog() {
-            var repository = new PartRepository(_db);
-            var assembler = new PartAssembler();
-            var partCatalogService = new PartCatalogService(repository, assembler);
-            var controller = new HomeController(partCatalogService);
-
-            var result = controller.Index() as ViewResult;
-
-            _output.WriteLine(result.ToJson());
-        }
-        [Fact]
-        public void Home_controller_get_quote() {
-            var repository = new PartRepository(_db);
-            var assembler = new PartAssembler();
-            var partCatalogService = new PartCatalogService(repository, assembler);
-            var controller = new HomeController(partCatalogService);
-
-            var selection = new PartCatalogDTO() {
-                Parts = new List<PartDTO> {
-                    new PartDTO() {
-                        Selected = true,
-                        Quantity = 50
-                    }
-                }
-            };
-
-            var result = controller.Quote(selection);
-
-            _output.WriteLine(result.ToJson());
-        }
     }
 }

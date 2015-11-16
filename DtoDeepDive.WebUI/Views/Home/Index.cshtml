@@ -1,4 +1,4 @@
-﻿@model DtoDeepDive.Data.DTO.PartCatalogDTO
+﻿@model DtoDeepDive.WebUI.ViewModels.CatalogViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            @Html.EditorFor(x => x.Parts)
+            @Html.EditorFor(x => x.Items)
           </tbody>
         </table>
         <button class="btn btn-default" type="submit">Generate Quote</button>

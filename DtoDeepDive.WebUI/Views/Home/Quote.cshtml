@@ -3,27 +3,26 @@
     ViewBag.Title = "Quote";
 }
 
-<h2>Quote</h2>
-<br />
 <div class="container">
+  <h2>Quote</h2>
+  <br />
   <div class="row"></div>
   @foreach (var part in Model.Parts) {
       <div class="panel panel-default">
+        <div class="panel-heading">Part Number: <strong>@part.PartNumber</strong></div>
         <div class="panel-body">
-          <h4>Part Number: <strong>@part.PartNumber</strong></h4>
+
           <h4>Components</h4>
-          <table class="table">
+          <table class="table table-condensed">
             <thead>
               <tr>
-                <th></th>
                 <th>Component Number</th>
                 <th>Description</th>
                 <th>Material</th>
                 <th>Quantity Per Assembly</th>
                 <th>Quantity Required</th>
                 <th>Cost Per Unit</th>
-                <th>Total Cost</th>
-                <th></th>
+                <th>Component Cost</th>
               </tr>
             </thead>
             <tbody>
@@ -35,9 +34,18 @@
                   <td>@component.QuantityPerAssembly</td>
                   <td>@component.QuantityRequired</td>
                   <td>@component.CostPerUnit</td>
-                  <td>@component.MaterialCost</td>
+                  <td>@component.ComponentCost</td>
                 </tr>
               }
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@Model.TotalMaterialCost</td>
+              </tr>
             </tbody>
           </table>
         </div>

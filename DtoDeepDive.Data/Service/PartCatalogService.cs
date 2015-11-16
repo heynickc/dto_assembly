@@ -17,20 +17,24 @@ namespace DtoDeepDive.Data.Service {
             var part = _partRepository.Get(x => x.PartNumber == partNumber);
             return _partAssembler.WritePartDto(part);
         }
-        public PartCatalogDTO GetPartCatalog() {
+        public IEnumerable<PartDTO> GetAllParts() {
             var parts = _partRepository.GetAll(x => true).ToList();
-            var partCatalogDto = _partAssembler.WritePartCatalogDTO(parts);
-            return partCatalogDto;
-        }
-        public QuoteDTO GetQuote(PartCatalogDTO partCatalogDto) {
-            // have to reconstitute the components and labor
-            // will refactor
-            var selectedPartIds = partCatalogDto.Parts.Where(y => y.Selected).Select(x => x.PartNumber).ToList();
-            var selectedParts = new List<PartDTO>();
-            foreach (var partId in selectedPartIds) {
-                selectedParts.Add(GetPart(partId));
+            var partDtos = new List<PartDTO>();
+            foreach (var part in parts) {
+                partDtos.Add(_partAssembler.WritePartDto(part));
             }
-            var quoteDto = _partAssembler.WriteQuoteDTO(selectedParts);
+            return partDtos;
+        }
+        public QuoteDTO GetQuote(Dictionary<string, double> selectedItems) {
+            var partDtos = new List<PartDTO>();
+            foreach (var selectedItem in selectedItems) {
+                var part = _partRepository.Get(p => p.PartNumber == selectedItem.Key);
+                var partDto = _partAssembler.WritePartDto(part);
+                partDto.CalculateTotalCost(selectedItem.Value);
+                partDtos.Add(partDto);
+            }
+            var quoteDto = _partAssembler.WriteQuoteDTO(partDtos);
+            quoteDto.CalculateTotalCosts();
             return quoteDto;
         }
     }
@@ -62,27 +66,13 @@ namespace DtoDeepDive.Data.Service {
             partDto.Components = componentsList;
             partDto.Labor = laborSequenceList;
 
-            partDto.TotalMaterialCost = partDto.Components.Sum(x => x.MaterialCost);
-            partDto.TotalLaborCost = partDto.Labor.Sum(x => x.LaborCost);
-
             return partDto;
-        }
-        public PartCatalogDTO WritePartCatalogDTO(IEnumerable<Part> parts) {
-            var partCatalogDto = new PartCatalogDTO();
-            foreach (var part in parts) {
-                partCatalogDto.Parts.Add(WritePartDto(part));
-            }
-            return partCatalogDto;
         }
         public QuoteDTO WriteQuoteDTO(IEnumerable<PartDTO> partDtos) {
             var quoteDto = new QuoteDTO();
             foreach (var part in partDtos) {
                 quoteDto.Parts.Add(part);
             }
-            quoteDto.TotalMaterialCost = quoteDto.Parts.Sum(x => x.TotalMaterialCost);
-            quoteDto.TotalLaborCost = quoteDto.Parts.Sum(x => x.TotalLaborCost);
-            quoteDto.TotalCost = quoteDto.TotalMaterialCost + quoteDto.TotalLaborCost;
-
             return quoteDto;
         }
     }

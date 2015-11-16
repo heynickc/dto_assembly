@@ -13,5 +13,10 @@ namespace DtoDeepDive.Data.DTO {
         public decimal TotalCost { get; set; }
         public decimal TotalMaterialCost { get; set; }
         public decimal TotalLaborCost { get; set; }
+        public void CalculateTotalCosts() {
+            TotalMaterialCost = Parts.Sum(x => x.TotalComponentCost);
+            TotalLaborCost = Parts.Sum(x => x.TotalLaborCost);
+            TotalCost = TotalMaterialCost + TotalLaborCost;
+        }
     }
 }

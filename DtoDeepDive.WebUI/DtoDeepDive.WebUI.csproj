@@ -167,6 +167,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CatalogItemViewModel.cs" />
+    <Compile Include="ViewModels\CatalogViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -204,7 +206,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Quote.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\PartDTO.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CatalogItemViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

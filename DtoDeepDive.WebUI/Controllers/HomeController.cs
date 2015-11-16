@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DtoDeepDive.Data;
 using DtoDeepDive.Data.Service;
 using DtoDeepDive.Data.DTO;
+using DtoDeepDive.WebUI.ViewModels;
 
 namespace DtoDeepDive.WebUI.Controllers {
     public class HomeController : Controller {
@@ -14,8 +15,15 @@ namespace DtoDeepDive.WebUI.Controllers {
             _partCatalogService = partCatalogService;
         }
         public ActionResult Index() {
-            var partCatalog = _partCatalogService.GetPartCatalog();
-            return View(partCatalog);
+            var partDtos = _partCatalogService.GetAllParts();
+            var catalogViewModel = new CatalogViewModel();
+            foreach (var partDto in partDtos) {
+                catalogViewModel.Items.Add(new CatalogItemViewModel() {
+                    PartNumber = partDto.PartNumber,
+                    ExtendedDescription = partDto.ExtendedDescription
+                });
+            }
+            return View(catalogViewModel);
         }
 
         public ActionResult About() {
@@ -30,8 +38,12 @@ namespace DtoDeepDive.WebUI.Controllers {
             return View();
         }
 
-        public ActionResult Quote(PartCatalogDTO partCatalogDto) {
-            var quoteDto = _partCatalogService.GetQuote(partCatalogDto);
+        public ActionResult Quote(CatalogViewModel catalogViewModel) {
+            var selectedItems = catalogViewModel.Items
+                .Where(i => i.Selected)
+                .Select(pn => new { pn.PartNumber, pn.Quantity })
+                .ToDictionary(pn => pn.PartNumber, qty => qty.Quantity);
+            var quoteDto = _partCatalogService.GetQuote(selectedItems);
             return View(quoteDto);
         }
     }

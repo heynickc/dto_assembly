@@ -1,11 +1,12 @@
 using DtoDeepDive.Data.DTO;
+using System.Collections.Generic;
 
 namespace DtoDeepDive.Data.Service {
 
     public interface IPartCatalogService {
         PartDTO GetPart(string partNumber);
-        PartCatalogDTO GetPartCatalog();
-        QuoteDTO GetQuote(PartCatalogDTO selectedParts);
+        IEnumerable<PartDTO> GetAllParts();
+        QuoteDTO GetQuote(Dictionary<string, double> selectedItems);
     }
 
 }

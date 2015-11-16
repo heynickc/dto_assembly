@@ -11,12 +11,12 @@ namespace DtoDeepDive.Data.DTO {
         public string Material { get; set; }
         public string UnitOfMeasure { get; set; }
         public double QuantityPerAssembly { get; set; }
-        public decimal CostPerUnit { get; set; }
         public double QuantityRequired { get; set; }
-        public decimal MaterialCost { get; set; }
-        public void CalculateMaterialCost(double quantity) {
+        public decimal CostPerUnit { get; set; }
+        public decimal ComponentCost { get; set; }
+        public void CalculateComponentCost(double quantity) {
             QuantityRequired = quantity * QuantityPerAssembly;
-            MaterialCost = (decimal)(quantity * QuantityPerAssembly) * CostPerUnit;
+            ComponentCost = (decimal)(quantity * QuantityPerAssembly) * CostPerUnit;
         }
     }
 }

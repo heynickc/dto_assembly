@@ -15,17 +15,16 @@ namespace DtoDeepDive.Data.DTO {
         public string UnitOfMeasure { get; set; }
         public List<LaborSequenceDTO> Labor { get; set; }
         public List<ComponentDTO> Components { get; set; }
-        public decimal TotalMaterialCost { get; set; }
+        public decimal TotalComponentCost { get; set; }
         public decimal TotalLaborCost { get; set; }
-        public bool Selected { get; set; }
-        public double Quantity { get; set; }
         public void CalculateTotalCost(double quantity) {
-            this.Quantity = quantity;
             foreach (var component in Components) {
-                component.CalculateMaterialCost(quantity);
+                component.CalculateComponentCost(quantity);
+                TotalComponentCost += component.ComponentCost;
             }
             foreach (var labor in Labor) {
                 labor.CalculateTotalLaborCost(quantity);
+                TotalLaborCost += labor.LaborCost;
             }
         }
     }
