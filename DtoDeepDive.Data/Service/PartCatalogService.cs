@@ -31,7 +31,7 @@ namespace DtoDeepDive.Data.Service {
                             let part = _partRepository.Get(p => p.PartNumber == selectedPart.PartNumber)
                             select _partAssembler.WritePartDto(part, selectedPart.Quantity))
                             .ToList();
-            var quoteDto = _partAssembler.WriteQuoteDTO(partDtos);
+            var quoteDto = _partAssembler.WriteQuoteDto(partDtos);
             return quoteDto;
         }
     }

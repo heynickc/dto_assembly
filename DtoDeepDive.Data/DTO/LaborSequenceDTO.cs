@@ -12,7 +12,10 @@ namespace DtoDeepDive.Data.DTO {
         public decimal LaborRate { get; set; }
         public decimal Burden { get; set; }
         public decimal GetLaborCost(double quantity) {
-            return ((decimal)RunTime * LaborRate) * Burden;
+            if (quantity > 0) {
+                return ((decimal)(RunTime * quantity) * LaborRate) + Burden;
+            }
+            return 0;
         }
     }
 }

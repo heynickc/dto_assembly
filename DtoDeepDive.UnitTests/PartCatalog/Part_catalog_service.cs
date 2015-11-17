@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using DtoDeepDive.Data.DTOAssemblers;
 
 namespace DtoDeepDive.UnitTests.PartCatalog {
-    public class Part_catalog_dto_assembler : IDisposable {
+    public class Part_catalog_service : IDisposable {
         private readonly ITestOutputHelper _output;
         private readonly IPartsCatalogDbContext _db;
-        public Part_catalog_dto_assembler(ITestOutputHelper output) {
+        public Part_catalog_service(ITestOutputHelper output) {
             _output = output;
             _db = new FakePartsCatalogDbContext();
             Fixtures.SeedFakePartDb(_db);

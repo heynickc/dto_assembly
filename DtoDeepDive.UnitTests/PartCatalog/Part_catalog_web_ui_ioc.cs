@@ -1,9 +1,7 @@
-﻿using DtoDeepDive.Data.DAL;
-using DtoDeepDive.Data.Repository;
-using DtoDeepDive.Data.Service;
+﻿using DtoDeepDive.Data.Service;
+using DtoDeepDive.UnitTests.IOC;
 using FluentAssertions;
 using Ninject;
-using Ninject.Modules;
 using Xunit;
 
 namespace DtoDeepDive.UnitTests.PartCatalog {
@@ -14,13 +12,6 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
                 var repository = kernel.Get<IPartCatalogService>();
                 repository.Should().BeOfType<PartCatalogService>();
             }
-        }
-    }
-    public class ServiceModule : NinjectModule {
-        public override void Load() {
-            Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
-            Bind<IRepository<Part>>().To<PartRepository>();
-            Bind<IPartCatalogService>().To<PartCatalogService>();
         }
     }
 }

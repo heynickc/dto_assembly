@@ -4,7 +4,7 @@ using DtoDeepDive.Data.DAL;
 using DtoDeepDive.Data.DTO;
 
 namespace DtoDeepDive.Data.DTOAssemblers {
-    public class PartAssembler {
+    public class PartAssembler : IPartAssembler {
         public PartDTO WritePartDto(Part part) {
             var partDto = new PartDTO();
             partDto.PartNumber = part.PartNumber;
@@ -64,7 +64,7 @@ namespace DtoDeepDive.Data.DTOAssemblers {
 
             return partDto;
         }
-        public QuoteDTO WriteQuoteDTO(IEnumerable<PartDTO> partDtos) {
+        public QuoteDTO WriteQuoteDto(IEnumerable<PartDTO> partDtos) {
             var quoteDto = new QuoteDTO();
             foreach (var part in partDtos) {
                 quoteDto.Parts.Add(part);
