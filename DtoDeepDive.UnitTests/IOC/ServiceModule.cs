@@ -19,9 +19,9 @@ using MediatR;
 namespace DtoDeepDive.UnitTests.IOC {
     public class ServiceModule : NinjectModule {
         public override void Load() {
-            Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
-            Bind<IRepository<Part>>().To<PartRepository>();
-            Bind<IPartCatalogService>().To<PartCatalogService>();
+            //Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
+            //Bind<IRepository<Part>>().To<PartRepository>();
+            //Bind<IPartCatalogService>().To<PartCatalogService>();
 
             this.Kernel.Components.Add<IBindingResolver, ContravariantBindingResolver>();
             this.Bind(scan => scan.FromAssemblyContaining<IMediator>().SelectAllClasses().BindDefaultInterface());
