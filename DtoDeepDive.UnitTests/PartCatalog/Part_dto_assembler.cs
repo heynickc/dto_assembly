@@ -15,8 +15,10 @@ using Ninject.Planning.Bindings.Resolvers;
 using DtoDeepDive.Data.DAL;
 using DtoDeepDive.Data.Repository;
 using DtoDeepDive.Data.Service;
+using DtoDeepDive.UnitTests;
+using DtoDeepDive.UnitTests.PartCatalog;
 
-namespace DtoDeepDive.UnitTests.PartCatalog {
+namespace DtoDeepDive.IntegrationTests.PartCatalog {
     public class Part_dto_assembler {
         private readonly ITestOutputHelper _output;
         public Part_dto_assembler(ITestOutputHelper output) {
@@ -38,14 +40,18 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
             using (var kernel = new StandardKernel()) {
 
                 kernel.Components.Add<IBindingResolver, ContravariantBindingResolver>();
-                kernel.Bind(scan => scan.FromAssemblyContaining<IMediator>().SelectAllClasses().BindDefaultInterface());
-                kernel.Bind(scan => scan.FromAssemblyContaining<Query>().SelectAllClasses().BindAllInterfaces());
+                kernel.Bind(scan => scan.FromAssemblyContaining<IMediator>()
+                    .SelectAllClasses()
+                    .BindDefaultInterface());
+                kernel.Bind(scan => scan.FromAssemblyContaining<PartDTO.Query>()
+                    .SelectAllClasses()
+                    .BindAllInterfaces());
 
                 kernel.Bind<SingleInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.Get(t));
                 kernel.Bind<MultiInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.GetAll(t));
 
                 var mediator = kernel.Get<IMediator>();
-                var query = new Query() {
+                var query = new PartDTO.Query() {
                     PartNumber = "TEST-PART-NUMBER|0"
                 };
                 var part = mediator.Send(query);
