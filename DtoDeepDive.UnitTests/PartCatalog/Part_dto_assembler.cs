@@ -10,6 +10,11 @@ using MediatR;
 using Ninject;
 using Xunit;
 using Xunit.Abstractions;
+using Ninject.Extensions.Conventions;
+using Ninject.Planning.Bindings.Resolvers;
+using DtoDeepDive.Data.DAL;
+using DtoDeepDive.Data.Repository;
+using DtoDeepDive.Data.Service;
 
 namespace DtoDeepDive.UnitTests.PartCatalog {
     public class Part_dto_assembler {
@@ -30,7 +35,15 @@ namespace DtoDeepDive.UnitTests.PartCatalog {
 
         [Fact]
         public void Mediator_pattern_partdto_assembly() {
-            using (var kernel = new StandardKernel(new ServiceModule())) {
+            using (var kernel = new StandardKernel()) {
+
+                kernel.Components.Add<IBindingResolver, ContravariantBindingResolver>();
+                kernel.Bind(scan => scan.FromAssemblyContaining<IMediator>().SelectAllClasses().BindDefaultInterface());
+                kernel.Bind(scan => scan.FromAssemblyContaining<Query>().SelectAllClasses().BindAllInterfaces());
+
+                kernel.Bind<SingleInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.Get(t));
+                kernel.Bind<MultiInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.GetAll(t));
+
                 var mediator = kernel.Get<IMediator>();
                 var query = new Query() {
                     PartNumber = "TEST-PART-NUMBER|0"

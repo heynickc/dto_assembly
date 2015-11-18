@@ -17,19 +17,13 @@ using Ninject.Planning.Bindings;
 using MediatR;
 
 namespace DtoDeepDive.UnitTests.IOC {
-    public class ServiceModule : NinjectModule {
-        public override void Load() {
-            //Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
-            //Bind<IRepository<Part>>().To<PartRepository>();
-            //Bind<IPartCatalogService>().To<PartCatalogService>();
-
-            this.Kernel.Components.Add<IBindingResolver, ContravariantBindingResolver>();
-            this.Bind(scan => scan.FromAssemblyContaining<IMediator>().SelectAllClasses().BindDefaultInterface());
-            this.Bind(scan => scan.FromAssemblyContaining<Query>().SelectAllClasses().BindAllInterfaces());
-            Bind<SingleInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.Get(t));
-            Bind<MultiInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.GetAll(t));
-        }
-    }
+    //public class ServiceModule : NinjectModule {
+    //    public override void Load() {
+    //        Bind<IPartsCatalogDbContext>().To<PartsCatalogDbContext>();
+    //        Bind<IRepository<Part>>().To<PartRepository>();
+    //        Bind<IPartCatalogService>().To<PartCatalogService>();
+    //    }
+    //}
     public class ContravariantBindingResolver : NinjectComponent, IBindingResolver {
         /// <summary>
         /// Returns any bindings from the specified collection that match the specified service.
