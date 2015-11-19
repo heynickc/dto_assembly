@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using DtoDeepDive.Data.DTO;
 using DtoDeepDive.Data.DTOAssemblers;
 using DtoDeepDive.UnitTests.IOC;
+using FluentAssertions;
 using MediatR;
 using Ninject;
-using Xunit;
-using Xunit.Abstractions;
 using Ninject.Extensions.Conventions;
 using Ninject.Planning.Bindings.Resolvers;
-using DtoDeepDive.Data.DAL;
-using DtoDeepDive.Data.Repository;
-using DtoDeepDive.Data.Service;
-using DtoDeepDive.UnitTests;
-using DtoDeepDive.UnitTests.PartCatalog;
-using FluentAssertions;
+using Xunit;
+using Xunit.Abstractions;
 
-namespace DtoDeepDive.IntegrationTests.PartCatalog {
+namespace DtoDeepDive.UnitTests.PartCatalog {
     public class Part_dto_assembler {
         private readonly ITestOutputHelper _output;
         public Part_dto_assembler(ITestOutputHelper output) {
