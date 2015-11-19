@@ -17,6 +17,7 @@ using DtoDeepDive.Data.Repository;
 using DtoDeepDive.Data.Service;
 using DtoDeepDive.UnitTests;
 using DtoDeepDive.UnitTests.PartCatalog;
+using FluentAssertions;
 
 namespace DtoDeepDive.IntegrationTests.PartCatalog {
     public class Part_dto_assembler {
@@ -38,12 +39,11 @@ namespace DtoDeepDive.IntegrationTests.PartCatalog {
         [Fact]
         public void Mediator_pattern_partdto_assembly() {
             using (var kernel = new StandardKernel()) {
-
                 kernel.Components.Add<IBindingResolver, ContravariantBindingResolver>();
                 kernel.Bind(scan => scan.FromAssemblyContaining<IMediator>()
                     .SelectAllClasses()
                     .BindDefaultInterface());
-                kernel.Bind(scan => scan.FromAssemblyContaining<PartDTO.Query>()
+                kernel.Bind(scan => scan.FromAssemblyContaining<Query>()
                     .SelectAllClasses()
                     .BindAllInterfaces());
 
@@ -51,11 +51,12 @@ namespace DtoDeepDive.IntegrationTests.PartCatalog {
                 kernel.Bind<MultiInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.GetAll(t));
 
                 var mediator = kernel.Get<IMediator>();
-                var query = new PartDTO.Query() {
+                var query = new Query() {
                     PartNumber = "TEST-PART-NUMBER|0"
                 };
-                var part = mediator.Send(query);
-                _output.WriteLine(part.ToJson());
+                var result = mediator.Send(query);
+
+                result.PartDto.Should().BeOfType<PartDTO>();
             }
         }
     }
