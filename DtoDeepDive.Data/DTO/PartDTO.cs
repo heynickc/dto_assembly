@@ -19,9 +19,21 @@ namespace DtoDeepDive.Data.DTO {
         public double Quantity { get; set; }
         public List<LaborSequenceDTO> Labor { get; set; }
         public List<ComponentDTO> Components { get; set; }
-        public decimal TotalComponentCost { get { return Components.Sum(x => x.GetComponentCost(Quantity)); } }
-        public decimal TotalLaborCost { get { return Labor.Sum(x => x.GetLaborCost(Quantity)); } }
-        public decimal TotalCost { get { return TotalComponentCost + TotalLaborCost; } }
+        public decimal TotalComponentCost {
+            get {
+                return Components.Sum(x => x.GetComponentCost(Quantity));
+            }
+        }
+        public decimal TotalLaborCost {
+            get {
+                return Labor.Sum(x => x.GetLaborCost(Quantity));
+            }
+        }
+        public decimal TotalCost {
+            get {
+                return TotalComponentCost + TotalLaborCost;
+            }
+        }
 
         public class Result {
             public Result() {
@@ -39,7 +51,8 @@ namespace DtoDeepDive.Data.DTO {
             }
             public Result Handle(Query message) {
 
-                var part = _db.Parts.SingleOrDefault(x => x.PartNumber == message.PartNumber);
+                var part = _db.Parts
+                    .SingleOrDefault(x => x.PartNumber == message.PartNumber);
 
                 var result = new Result();
                 result.PartDto.PartNumber = part.PartNumber;
