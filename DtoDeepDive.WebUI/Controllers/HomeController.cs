@@ -16,9 +16,9 @@ namespace DtoDeepDive.WebUI.Controllers {
         }
         public ActionResult Index() {
             var partDtos = _partCatalogService.GetAllParts();
-            var catalogViewModel = new CatalogViewModel();
+            var catalogViewModel = new Catalog();
             foreach (var partDto in partDtos) {
-                catalogViewModel.Items.Add(new CatalogItemViewModel() {
+                catalogViewModel.Items.Add(new CatalogItem() {
                     PartNumber = partDto.PartNumber,
                     ExtendedDescription = partDto.ExtendedDescription
                 });
@@ -38,8 +38,8 @@ namespace DtoDeepDive.WebUI.Controllers {
             return View();
         }
 
-        public ActionResult Quote(CatalogViewModel catalogViewModel) {
-            var partDtos = catalogViewModel.Items
+        public ActionResult Quote(Catalog catalog) {
+            var partDtos = catalog.Items
                 .Where(i => i.Selected)
                 .Select(item => new PartDTO() {
                     PartNumber = item.PartNumber,
