@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DtoDeepDive.Data.DTO {
     public class LaborSequenceDTO {
-        public string SequenceNumber { get; set; }
-        public string SequenceDescription { get; set; }
+        public string LaborSequenceNumber { get; set; }
+        public string LaborSequenceDesc { get; set; }
         public double RunTime { get; set; }
         public decimal LaborRate { get; set; }
         public decimal Burden { get; set; }

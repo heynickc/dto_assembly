@@ -61,8 +61,8 @@
             <tbody>
               @foreach (var laborSequence in part.Labor) {
                   <tr>
-                    <td>@laborSequence.SequenceNumber</td>
-                    <td>@laborSequence.SequenceDescription</td>
+                    <td>@laborSequence.LaborSequenceNumber</td>
+                    <td>@laborSequence.LaborSequenceDesc</td>
                     <td>@laborSequence.RunTime</td>
                     <td>@laborSequence.LaborRate.ToString("C")</td>
                     <td>@laborSequence.GetLaborCost(part.Quantity).ToString("C")</td>

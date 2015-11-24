@@ -20,11 +20,7 @@ namespace DtoDeepDive.Data.Service {
         }
         public IEnumerable<PartDTO> GetAllParts() {
             var parts = _partRepository.GetAll(x => true).ToList();
-            var partDtos = new List<PartDTO>();
-            foreach (var part in parts) {
-                partDtos.Add(_partAssembler.WritePartDto(part));
-            }
-            return partDtos;
+            return parts.Select(part => _partAssembler.WritePartDto(part)).ToList();
         }
         public QuoteDTO GetQuote(List<PartDTO> selectedParts) {
             var partDtos = (from selectedPart in selectedParts

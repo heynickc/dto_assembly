@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using DtoDeepDive.Data.DAL;
+using Ninject.Infrastructure.Language;
 
 namespace DtoDeepDive.Data.Repository {
     public class PartRepository : IRepository<Part> {
@@ -11,8 +13,8 @@ namespace DtoDeepDive.Data.Repository {
         public PartRepository(IPartsCatalogDbContext dbContext) {
             _dbContext = dbContext;
         }
-        public IQueryable<Part> GetAll(Expression<Func<Part, bool>> predicate = null) {
-            return _dbContext.Parts.Where(predicate);
+        public IEnumerable<Part> GetAll(Expression<Func<Part, bool>> predicate = null) {
+            return _dbContext.Parts.Where(predicate).ToEnumerable();
         }
         public Part Get(Expression<Func<Part, bool>> predicate) {
             return _dbContext.Parts.SingleOrDefault(predicate);

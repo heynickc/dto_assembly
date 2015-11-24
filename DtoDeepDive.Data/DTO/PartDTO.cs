@@ -71,8 +71,8 @@ namespace DtoDeepDive.Data.DTO {
                 }).ToList();
             var laborSequenceList = part.LaborSequences
                 .Select(labor => new LaborSequenceDTO() {
-                    SequenceNumber = labor.LaborSequenceNumber,
-                    SequenceDescription = labor.LaborSequenceDesc,
+                    LaborSequenceNumber = labor.LaborSequenceNumber,
+                    LaborSequenceDesc = labor.LaborSequenceDesc,
                     RunTime = labor.RunTime,
                     LaborRate = labor.LaborRate,
                     Burden = labor.Burden

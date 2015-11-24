@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DtoDeepDive.Data.Repository {
             _dbContext = context;
             _dbSet = _dbContext.Set<T>();
         }
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate = null) {
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null) {
             if (predicate != null) {
                 return _dbSet.Where(predicate);
             }
