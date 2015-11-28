@@ -47,15 +47,15 @@ namespace DtoDeepDive.IntegrationTests.PartCatalog {
             }
             _db.SaveChanges();
         }
-        [Fact]
+        [Fact(Skip = "Only for seeding db")]
         public void when_getting_part_from_database() {
             var parts = _db.Parts.ToList();
             _output.WriteLine(parts.ToJson());
         }
         public void Dispose() {
-            //var parts = _db.Parts.ToList();
-            //_db.Parts.RemoveRange(parts);
-            //_db.SaveChanges();
+            var parts = _db.Parts.ToList();
+            _db.Parts.RemoveRange(parts);
+            _db.SaveChanges();
             _db.Dispose();
         }
     }

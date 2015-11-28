@@ -70,6 +70,7 @@
     <Compile Include="DTO\ComponentDTO.cs" />
     <Compile Include="DTO\LaborSequenceDTO.cs" />
     <Compile Include="DTO\QuoteDTO.cs" />
+    <Compile Include="QueryDbContext\PartsCatalogQueryDbContext.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Service\IPartCatalogService.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -99,6 +100,7 @@
       <LastGenOutput>PartsCatalog.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DtoDeepDive.Data.DAL;
 using MediatR;
+using DtoDeepDive.Data.QueryDbContext;
 
 namespace DtoDeepDive.Data.DTO {
     public class PartDTO {
@@ -45,43 +46,42 @@ namespace DtoDeepDive.Data.DTO {
         public string PartNumber { get; set; }
     }
     public class Handler : IRequestHandler<Query, Result> {
-        private readonly PartsCatalogDbContext _db;
-        public Handler(PartsCatalogDbContext db) {
+        private readonly PartsCatalogQueryDbContext _db;
+        public Handler(PartsCatalogQueryDbContext db) {
             _db = db;
         }
         public Result Handle(Query message) {
 
             var part = _db.Parts
-                .SingleOrDefault(x => x.PartNumber == message.PartNumber);
+                .Where(x => x.PartNumber == message.PartNumber);
 
             var result = new Result();
-            result.PartDto.PartNumber = part.PartNumber;
-            result.PartDto.UnitOfMeasure = part.UnitOfMeasure;
-            result.PartDto.ExtendedDescription = part.ExtendedDescription;
-            result.PartDto.PartDescription = part.PartDescription;
-            result.PartDto.SalesCode = part.SalesCode;
-            var componentsList = part.Components
-                .Select(component => new ComponentDTO() {
-                    Number = component.ComponentNumber,
-                    Description = component.ComponentDescription,
-                    Material = component.Material,
-                    UnitOfMeasure = component.UnitOfMeasure,
-                    QuantityPerAssembly = component.QuantityPerAssembly,
-                    CostPerUnit = component.CostPerUnit
-                }).ToList();
-            var laborSequenceList = part.LaborSequences
-                .Select(labor => new LaborSequenceDTO() {
-                    LaborSequenceNumber = labor.LaborSequenceNumber,
-                    LaborSequenceDesc = labor.LaborSequenceDesc,
-                    RunTime = labor.RunTime,
-                    LaborRate = labor.LaborRate,
-                    Burden = labor.Burden
-                }).ToList();
-            result.PartDto.Components = componentsList;
-            result.PartDto.Labor = laborSequenceList;
+            result.PartDto = part.Select(p => new PartDTO {
+                PartNumber = p.PartNumber,
+                UnitOfMeasure = p.UnitOfMeasure,
+                ExtendedDescription = p.ExtendedDescription,
+                PartDescription = p.PartDescription,
+                SalesCode = p.SalesCode,
+                Components = p.Components
+                    .Select(component => new ComponentDTO() {
+                        Number = component.ComponentNumber,
+                        Description = component.ComponentDescription,
+                        Material = component.Material,
+                        UnitOfMeasure = component.UnitOfMeasure,
+                        QuantityPerAssembly = component.QuantityPerAssembly,
+                        CostPerUnit = component.CostPerUnit
+                    }).ToList(),
+                Labor = p.LaborSequences
+                    .Select(labor => new LaborSequenceDTO() {
+                        LaborSequenceNumber = labor.LaborSequenceNumber,
+                        LaborSequenceDesc = labor.LaborSequenceDesc,
+                        RunTime = labor.RunTime,
+                        LaborRate = labor.LaborRate,
+                        Burden = labor.Burden
+                    }).ToList(),
+            }).FirstOrDefault();
 
             return result;
         }
     }
-
 }
