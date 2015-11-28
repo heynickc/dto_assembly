@@ -38,15 +38,15 @@ namespace DtoDeepDive.WebUI.Controllers {
             return View();
         }
 
-        public ActionResult Quote(Catalog catalog) {
-            var partDtos = catalog.Items
-                .Where(i => i.Selected)
-                .Select(item => new PartDTO() {
-                    PartNumber = item.PartNumber,
-                    Quantity = item.Quantity
-                }).ToList();
-            var quoteDto = _partCatalogService.GetQuote(partDtos);
-            return View(quoteDto);
-        }
+        //public ActionResult Quote(Catalog catalog) {
+        //    var partDtos = catalog.Items
+        //        .Where(i => i.Selected)
+        //        .Select(item => new PartDTO() {
+        //            PartNumber = item.PartNumber,
+        //            Quantity = item.Quantity
+        //        }).ToList();
+        //    var quoteDto = _partCatalogService.GetQuote(partDtos);
+        //    return View(quoteDto);
+        //}
     }
 }
