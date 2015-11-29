@@ -20,10 +20,12 @@ namespace DtoDeepDive.WebUI.Views {
             public CatalogViewModel Handle(Query message) {
                 var catalogViewModel = new CatalogViewModel();
 
-                catalogViewModel.Items.AddRange(_db.Parts.Select(p => new CatalogItemViewModel() {
-                    PartNumber = p.PartNumber,
-                    ExtendedDescription = p.ExtendedDescription
-                }));
+                catalogViewModel.Items.AddRange(
+                    _db.Parts.Select(p => new CatalogItemViewModel() {
+                        PartNumber = p.PartNumber,
+                        ExtendedDescription = p.ExtendedDescription
+                    }                    )
+                );
 
                 return catalogViewModel;
             }
