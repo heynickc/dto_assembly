@@ -19,6 +19,9 @@ namespace DtoDeepDive.Data.Repository {
         public IEnumerable<Part> GetPartsWithMoreThanOneComponent() {
             return GetAll(x => x.Components.Count() > 1);
         }
+        public IEnumerable<Part> GetAllParts() {
+            return GetAll(x => true);
+        }
         public Part Get(Expression<Func<Part, bool>> predicate) {
             return _dbContext.Parts.SingleOrDefault(predicate);
         }

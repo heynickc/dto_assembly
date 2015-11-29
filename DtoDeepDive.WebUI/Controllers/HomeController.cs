@@ -7,22 +7,34 @@ using DtoDeepDive.Data;
 using DtoDeepDive.Data.Service;
 using DtoDeepDive.Data.DTO;
 using DtoDeepDive.WebUI.ViewModels;
+using MediatR;
+using DtoDeepDive.WebUI.Views;
 
 namespace DtoDeepDive.WebUI.Controllers {
     public class HomeController : Controller {
-        private readonly IPartCatalogService _partCatalogService;
-        public HomeController(IPartCatalogService partCatalogService) {
-            _partCatalogService = partCatalogService;
+        private readonly IMediator _mediator;
+        public HomeController(IMediator mediator) {
+            _mediator = mediator;
         }
+        //private readonly IPartCatalogService _partCatalogService;
+        //public HomeController(IPartCatalogService partCatalogService) {
+        //    _partCatalogService = partCatalogService;
+        //}
+        //public ActionResult Index() {
+        //    var partDtos = _partCatalogService.GetAllParts();
+        //    var catalogViewModel = new Catalog();
+        //    foreach (var partDto in partDtos) {
+        //        catalogViewModel.Items.Add(new CatalogItem() {
+        //            PartNumber = partDto.PartNumber,
+        //            ExtendedDescription = partDto.ExtendedDescription
+        //        });
+        //    }
+        //    return View(catalogViewModel);
+        //}
+
         public ActionResult Index() {
-            var partDtos = _partCatalogService.GetAllParts();
-            var catalogViewModel = new Catalog();
-            foreach (var partDto in partDtos) {
-                catalogViewModel.Items.Add(new CatalogItem() {
-                    PartNumber = partDto.PartNumber,
-                    ExtendedDescription = partDto.ExtendedDescription
-                });
-            }
+            var catalogViewModel = _mediator.Send(new Index.Query());
+
             return View(catalogViewModel);
         }
 

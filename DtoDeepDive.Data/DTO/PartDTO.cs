@@ -85,3 +85,29 @@ namespace DtoDeepDive.Data.DTO {
         }
     }
 }
+// TODO for refactoring later
+//public List<PartDTO> Handle(Query message) {
+//    var result = _db.Parts.Select(p => new PartDTO {
+//        PartNumber = p.PartNumber,
+//        UnitOfMeasure = p.UnitOfMeasure,
+//        ExtendedDescription = p.ExtendedDescription,
+//        PartDescription = p.PartDescription,
+//        SalesCode = p.SalesCode,
+//        Components = p.Components
+//            .Select(component => new ComponentDTO() {
+//                Number = component.ComponentNumber,
+//                Description = component.ComponentDescription,
+//                Material = component.Material,
+//                UnitOfMeasure = component.UnitOfMeasure,
+//                QuantityPerAssembly = component.QuantityPerAssembly,
+//                CostPerUnit = component.CostPerUnit
+//            }).ToList(),
+//        Labor = p.LaborSequences
+//            .Select(labor => new LaborSequenceDTO() {
+//                LaborSequenceNumber = labor.LaborSequenceNumber,
+//                LaborSequenceDesc = labor.LaborSequenceDesc,
+//                RunTime = labor.RunTime,
+//                LaborRate = labor.LaborRate,
+//                Burden = labor.Burden
+//            }).ToList(),
+//    }).ToList();

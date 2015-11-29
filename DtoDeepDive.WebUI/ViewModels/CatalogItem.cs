@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace DtoDeepDive.WebUI.ViewModels {
-    public class CatalogItem {
+    public class CatalogItemViewModel {
         public string PartNumber { get; set; }
         public string ExtendedDescription { get; set; }
         public bool Selected { get; set; }
