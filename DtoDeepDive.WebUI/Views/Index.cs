@@ -24,7 +24,7 @@ namespace DtoDeepDive.WebUI.Views {
                     _db.Parts.Select(p => new CatalogItemViewModel() {
                         PartNumber = p.PartNumber,
                         ExtendedDescription = p.ExtendedDescription
-                    }                    )
+                    })
                 );
 
                 return catalogViewModel;
